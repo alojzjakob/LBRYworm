@@ -1,0 +1,5 @@
+{
+  "name": "LBRYworm"
+, "files": [ { "directory": "./", "recursive": 1 } ]
+, "index": true
+}
