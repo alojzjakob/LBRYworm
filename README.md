@@ -1,6 +1,8 @@
 # LBRYworm
 Wordpress plugin to build a book (or whatever) search front-end for LBRY blockchain!
 
+Find your books and create your own library with rooms and shelves!
+
 ![](https://github.com/alojzjakob/LBRYworm/blob/main/lbryworm/css/lbryworm-logo.png)
 
 ## recommended additional plugins:
