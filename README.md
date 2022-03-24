@@ -5,12 +5,19 @@ Find your books and create your own library with rooms and shelves!
 
 ![](https://github.com/alojzjakob/LBRYworm/blob/main/lbryworm/css/lbryworm-logo.png)
 
-## recommended additional plugins:
+## Available shortcodes
+**[lbryworm-search]** - displays search and search results
+
+**[lbryworm-library]** - library management for logged in user
+
+**[lbryworm-profile-widget]** - widget that utilizes "clean login" plugin to show user account related icons
+
+## Recommended additional plugins:
 https://wordpress.org/plugins/clean-login/
 
 https://wordpress.org/plugins/delete-me/
 
-## optional plugins
+## Optional plugins
 
 https://wordpress.org/plugins/font-awesome/
 
