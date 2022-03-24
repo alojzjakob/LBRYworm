@@ -22,4 +22,4 @@ I can buy coffee with LBC, so if you want me caffeinated, send some LBC here:
 
 https://odysee.com/@Alojz:f576d5dba905fc179de880c3fe3eb3281ea74f59
 
-or this LBC wallet address: badF6UwZvPwNSLbRE83L1yZyb6Ba9omLjq
+or this LBC wallet address: `badF6UwZvPwNSLbRE83L1yZyb6Ba9omLjq`
