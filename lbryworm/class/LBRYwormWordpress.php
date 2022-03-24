@@ -35,6 +35,9 @@ class LBRYwormWordpress{
                     <a href="https://odysee.com/@LBRYworm:8e4e01213bfa91b7a675aad20c0357d6999e4414" target="_blank">
                         LBRYworm on Odysee
                     </a>
+                    <a href="https://github.com/alojzjakob/LBRYworm" target="_blank">
+                        <i class="fa fa-github"></i>
+                    </a>
                 </div>
                 ';
     }
