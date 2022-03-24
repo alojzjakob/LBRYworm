@@ -89,9 +89,9 @@ class LBRYwormAdmin{
     }
 
     public function plugin_adminmenu(){
-        add_menu_page('LBRYworm', 'LBRYworm', 'manage_options', 'lbryworm-settings', array($this,'lbryworm_settings'), 'dashicons-chart-area');
+        add_menu_page('LBRYworm', 'LBRYworm', 'manage_options', 'lbryworm-settings', array($this,'lbryworm_settings'), 'dashicons-book-alt');
         add_submenu_page( 'lbryworm-settings', 'Settings', 'Settings', 'manage_options', 'lbryworm-settings', array($this,'lbryworm_settings') );
-        //add_submenu_page( 'lbryworm-settings', 'API', 'API', 'manage_options', 'lbryworm-api', array($this,'lbryworm_api') );
+        add_submenu_page( 'lbryworm-settings', 'Shortcodes', 'Shortcodes', 'manage_options', 'lbryworm-shortcodes', array($this,'lbryworm_shortcodes') );
         add_action( 'admin_print_styles', array($this,'plugin_admin_styles') );
     }
     
@@ -111,7 +111,7 @@ class LBRYwormAdmin{
         
         <form method="post">
             <div style="padding:10px; border:1px solid #555; width:90%;">
-                <h2>Cruncher settings</h2>
+                <h2>General settings</h2>
                 <div style="margin-bottom:10px;">
                     <input type="checkbox" name="lw_setting_1" value="lw_setting_1" <?php if($lw_setting_1){echo 'checked';} ?>>
                     <label for="dm_per_page">
@@ -129,10 +129,25 @@ class LBRYwormAdmin{
         
         <?php
     }
-    public function lbryworm_api(){
+    public function lbryworm_shortcodes(){
         ?>
-        <h1>LBRYworm - API settings</h1>
+        <h1>LBRYworm - Available shortcodes</h1>
         
+        <p>
+            <b>[lbryworm-search]</b> - displays search and search results
+        </p>
+        <p>
+            <b>[lbryworm-library]</b> - library management for logged in user
+        </p>
+        <p>
+            <b>[lbryworm-profile-widget]</b> - widget that utilizes "clean login" plugin to show user account related icons
+        </p>
+        
+        <br/><br/>
+        <hr/>
+        <p>
+            Clean Login plugin: <a href="https://wordpress.org/plugins/clean-login/" target="_blank">https://wordpress.org/plugins/clean-login/</a>
+        </p>
         
         <?php
     }
