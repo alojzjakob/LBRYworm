@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 25, 2022 at 07:25 PM
+-- Generation Time: Mar 26, 2022 at 04:45 PM
 -- Server version: 5.6.51-cll-lve
 -- PHP Version: 7.3.32
 
@@ -75,7 +75,9 @@ ALTER TABLE `lw_books`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id_index` (`user_id`),
   ADD KEY `user_id_shelf_id_index` (`user_id`,`shelf_id`),
-  ADD KEY `user_id_room_id_index` (`user_id`,`room_id`);
+  ADD KEY `user_id_room_id_index` (`user_id`,`room_id`),
+  ADD KEY `room_id_index` (`room_id`),
+  ADD KEY `shelf_id_index` (`shelf_id`);
 
 --
 -- Indexes for table `lw_rooms`
@@ -90,7 +92,8 @@ ALTER TABLE `lw_rooms`
 ALTER TABLE `lw_shelves`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id_index` (`user_id`),
-  ADD KEY `user_id_room_id_index` (`user_id`,`room_id`);
+  ADD KEY `user_id_room_id_index` (`user_id`,`room_id`),
+  ADD KEY `room_id_index` (`room_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables

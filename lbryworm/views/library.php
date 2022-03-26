@@ -26,6 +26,10 @@
             <?php
                 if($rooms){
                     foreach($rooms as $r){
+                        
+                        $shelves_count = $LBRYworm->shelves->get_shelves_count($r->id);
+                        $books_count = $LBRYworm->books->get_books_in_room_count($r->id);
+                        
                         $room_style='';
                         if($r->room_data){
                             $room_data=json_decode($r->room_data);
@@ -38,12 +42,20 @@
                                 }
                             }
                         }
+                        
                         ?>
                         <div class="library_item" id="room_<?php echo $r->id; ?>" style="<?php echo $room_style; ?>">
                             <a class="library_item_title" href="?room=<?php echo $r->id; ?>">
                                 <?php echo stripslashes($r->room_name); ?>
                             </a>
-                            
+                            <div class="library_details f-left">
+                                <span>
+                                    <i class="fa fa-bars"></i><?php echo $shelves_count; ?>
+                                </span>
+                                <span>
+                                    <i class="fa fa-book"></i><?php echo $books_count; ?>
+                                </span>
+                            </div>
                             <div class="library_controls f-right">
                                 <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/room_remove.php?id=<?php echo $r->id; ?>" rel="modal:open"><i class="fa fa-trash"></i></a>
                             </div>
@@ -97,6 +109,9 @@
             <?php
                 if($shelves){
                     foreach($shelves as $s){
+                        
+                        $books_count = $LBRYworm->books->get_books_in_shelf_count($s->id);
+                        
                         $shelf_style='';
                         if($s->shelf_data){
                             $shelf_data=json_decode($s->shelf_data);
@@ -113,6 +128,12 @@
                             <a class="library_item_title" href="?shelf=<?php echo $s->id; ?>">
                                 <?php echo stripslashes($s->shelf_name); ?>
                             </a>
+                            
+                            <div class="library_details f-left">
+                                <span>
+                                    <i class="fa fa-book"></i><?php echo $books_count; ?>
+                                </span>
+                            </div>
                             
                             <div class="library_controls f-right">
                                 <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/shelf_remove.php?id=<?php echo $s->id; ?>" rel="modal:open"><i class="fa fa-trash"></i></a>

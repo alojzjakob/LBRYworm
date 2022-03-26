@@ -508,13 +508,29 @@ body.dark .library_item_title{
     border-bottom:2px solid #000;
 }
 
-.library_controls{
+
+.library_controls, .library_details{
     background-color: rgba(255,255,255,0.8);
     padding:10px;
     border-radius:0 0 0 10px;
 }
 
-body.dark .library_controls{
+.library_details{
+    border-radius:0 0 10px 0;
+    padding-left:5px;
+    padding-right:5px;
+}
+
+.library_details span i{
+    margin-right:3px;
+}
+
+.library_details span{
+    margin-left:5px;
+    margin-right:5px;
+}
+
+body.dark .library_controls,body.dark .library_details{
     background-color: rgba(0,0,0,0.8);
 }
 

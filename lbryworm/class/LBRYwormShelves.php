@@ -49,6 +49,12 @@ class LBRYwormShelves{
         return $wpdb->get_row("SELECT * FROM lw_shelves WHERE user_id={$this->LBRYworm->user->ID} AND id=$id");
     }
     
+    public function get_shelves_count($room_id){
+        global $wpdb;
+        $res = $wpdb->get_row("SELECT COUNT(id) AS shelves FROM lw_shelves WHERE room_id=$room_id");
+        return $res->shelves;
+    }
+    
     public function remove_shelf($id){
         //top_channels_...
         global $wpdb;

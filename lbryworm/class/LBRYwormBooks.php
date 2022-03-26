@@ -54,6 +54,18 @@ class LBRYwormBooks{
         return $wpdb->get_row("SELECT * FROM lw_books WHERE user_id={$this->LBRYworm->user->ID} AND id=$id");
     }
     
+    public function get_books_in_room_count($room_id){
+        global $wpdb;
+        $res = $wpdb->get_row("SELECT COUNT(id) AS books FROM lw_books WHERE room_id=$room_id");
+        return $res->books;
+    }
+    
+    public function get_books_in_shelf_count($shelf_id){
+        global $wpdb;
+        $res = $wpdb->get_row("SELECT COUNT(id) AS books FROM lw_books WHERE shelf_id=$shelf_id");
+        return $res->books;
+    }
+    
     public function remove_book($id){
         //top_channels_...
         global $wpdb;
