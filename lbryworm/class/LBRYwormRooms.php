@@ -16,9 +16,11 @@ class LBRYwormRooms{
                 array(
                     'user_id'=>$this->LBRYworm->user->ID,
                     'room_name'=>$name,
+                    'room_data'=>json_encode($_POST),
                 ),
                 array(
                     '%d',
+                    '%s',
                     '%s',
                 )
             );

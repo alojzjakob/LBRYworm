@@ -21,10 +21,12 @@ class LBRYwormShelves{
                         'user_id'=>$this->LBRYworm->user->ID,
                         'room_id'=>$room_id,
                         'shelf_name'=>$name,
+                        'shelf_data'=>json_encode($_POST),
                     ),
                     array(
                         '%d',
                         '%d',
+                        '%s',
                         '%s',
                     )
                 );

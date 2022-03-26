@@ -16,7 +16,7 @@ if(count($shelves)>0){
         <?php
         if(!$noshelves){
         ?>
-            <p>in <strong><?php echo $room->room_name; ?></strong></p>
+            <p>in <strong><?php echo stripslashes($room->room_name); ?></strong></p>
             <p>
                 <input type="hidden" id="room_id" name="room_id" value="<?php echo $_GET['room_id']; ?>">
                 <input type="hidden" id="claim_id" name="claim_id" value="<?php echo $_GET['claim_id']; ?>">
@@ -24,7 +24,7 @@ if(count($shelves)>0){
                 <?php
                 foreach($shelves as $s){
                     ?>
-                    <option value="<?php echo $s->id; ?>"><?php echo $s->shelf_name; ?></option>
+                    <option value="<?php echo $s->id; ?>"><?php echo stripslashes($s->shelf_name); ?></option>
                     <?php
                 }
                 ?>

@@ -16,7 +16,7 @@ $rooms=$LBRYworm->rooms->get_rooms();
         ?>
             <p>
                 <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/book_add_shelf.php?claim_id=<?php echo $_GET['claim_id']; ?>&room_id=<?php echo $r->id; ?>" rel="modal:open">
-                    <?php echo $r->room_name; ?>
+                    <?php echo stripslashes($r->room_name); ?>
                 </a>
             </p>
         <?php

@@ -1,3 +1,7 @@
+html{
+    height:100%;
+}
+
 .lbryworm_main_navigation{
     width:100%!important;
     position:fixed;
@@ -28,6 +32,7 @@ body.dark .lbry-light-dark{
 .lbryworm_content{
     margin-top:66px;
     z-index:0;
+    margin-bottom:100px;
 }
 
 .login_gate{
@@ -61,6 +66,10 @@ body.dark .lbry-light-dark{
     padding:20px;
     padding-top:1px;
     box-sizing:border-box;
+}
+
+#search_results{
+    overflow:hidden;
 }
 
 #search_results,.lbryworm_box{
@@ -268,6 +277,7 @@ body.dark .homepage_hero h2, body.dark .login_gate h2{
 /* dark theme */
 
 body{
+    background-color:#ccc;
     background-size: initial;
     background-repeat: repeat;
  background-position:top center;
@@ -456,6 +466,59 @@ body.dark div.breadcrumbs,body.dark div.breadcrumbs a{
     right: 20px;
     top: 10px;
 }*/
+
+
+.library_item{
+    margin-bottom:20px;
+    background-color: rgba(255,255,255,0.3);
+    overflow:hidden;
+    box-shadow: 0 0 20px 0px rgba(255,255,255,0.5);
+    border-radius:10px;
+    border:1px solid #fff;
+}
+
+.library_item:hover{
+    box-shadow: 0 0 20px 0px rgba(255,255,255,1);
+}
+
+body.dark .library_item{
+    background-color: rgba(0,0,0,0.2);
+    box-shadow: 0 0 20px 0px rgb(0,0,0,0.4);
+    border:1px solid #000;
+}
+
+body.dark .library_item:hover{
+    box-shadow: 0 0 20px 0px rgb(0,0,0,1);
+}
+
+.library_item_title{
+    display:inline-block;
+    box-sizing:border-box;
+    width:100%;
+    padding:10px;
+    color:#000;
+    background-color: rgba(255,255,255,0.8);
+    border-bottom:2px solid #ccc;
+}
+
+body.dark .library_item_title{
+    padding:10px;
+    color:#ccc;
+    background-color: rgba(0,0,0,0.8);
+    border-bottom:2px solid #000;
+}
+
+.library_controls{
+    background-color: rgba(255,255,255,0.8);
+    padding:10px;
+    border-radius:0 0 0 10px;
+}
+
+body.dark .library_controls{
+    background-color: rgba(0,0,0,0.8);
+}
+
+
 
 #books{
     margin-bottom:100px;
@@ -652,12 +715,12 @@ body.dark #books{
 .bookshelf_break,
 .bookshelf_break::before,
 .bookshelf_break::after{
-    background-image:url(./images/shelf_textures/wood-texture-1.jpg);
+    background-image:url(../images/shelf_textures/wood-texture-1.jpg);
     background-repeat:repeat;
     background-position:top left;
     background-size:initial;
-    background-blend-mode: overlay;
-    background-color:#e8a358;
+    /*background-blend-mode: overlay;
+    background-color:#e8a358;*/
 }
 
 body.dark .bookshelf_break{

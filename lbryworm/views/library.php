@@ -26,13 +26,28 @@
             <?php
                 if($rooms){
                     foreach($rooms as $r){
+                        $room_style='';
+                        if($r->room_data){
+                            $room_data=json_decode($r->room_data);
+                            if($room_data->bg_image!==''){
+                                $room_style.='background-image:url('.get_site_url().'/wp-content/plugins/lbryworm/images/room_wallpapers/'.$room_data->bg_image.'.jpg);background-position:center center;';
+                                if(stripos($room_data->bg_image,'-tile')>0){
+                                    $room_style.='background-repeat:repeat;';
+                                }else{
+                                    $room_style.='background-repeat:no-repeat;background-size:cover;';
+                                }
+                            }
+                        }
                         ?>
-                        <div class="room" id="room_<?php echo $r->id; ?>">
-                            <a href="?room=<?php echo $r->id; ?>">
-                                <?php echo $r->room_name; ?>
+                        <div class="library_item" id="room_<?php echo $r->id; ?>" style="<?php echo $room_style; ?>">
+                            <a class="library_item_title" href="?room=<?php echo $r->id; ?>">
+                                <?php echo stripslashes($r->room_name); ?>
                             </a>
                             
-                            <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/room_remove.php?id=<?php echo $r->id; ?>" rel="modal:open"><i class="fa fa-trash"></i></a>
+                            <div class="library_controls f-right">
+                                <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/room_remove.php?id=<?php echo $r->id; ?>" rel="modal:open"><i class="fa fa-trash"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
                         <?php
                     }
@@ -47,11 +62,32 @@
         
         $shelves=$LBRYworm->shelves->get_shelves($_GET['room']);
         $room=$LBRYworm->rooms->get_room($_GET['room']);
+        
+        $room_style='';
+        if($room->room_data){
+            $room_data=json_decode($room->room_data);
+            if($room_data->bg_image!==''){
+                $room_style.='background-image:url('.get_site_url().'/wp-content/plugins/lbryworm/images/room_wallpapers/'.$room_data->bg_image.'.jpg);background-position:center center;';
+                if(stripos($room_data->bg_image,'-tile')>0){
+                    $room_style.='background-repeat:repeat;';
+                }else{
+                    $room_style.='background-repeat:no-repeat;background-size:cover;';
+                }
+            }
+        }
+        
         ?>
+        <style>
+            <?php
+            if($room_style!==''){
+                ?>body{<?php echo $room_style; ?>}<?php
+            }
+            ?>
+        </style>
         
         <div class="breadcrumbs">
             <div class="f-left">
-                <a href="<?php echo site_url(); ?>"><i class="fa fa-home"></i></a> &raquo; <a href="<?php echo site_url(); ?>/library/">Rooms</a> &raquo; <?php echo $room->room_name; ?>
+                <a href="<?php echo site_url(); ?>"><i class="fa fa-home"></i></a> &raquo; <a href="<?php echo site_url(); ?>/library/">Rooms</a> &raquo; <?php echo stripslashes($room->room_name); ?>
             </div>
             <a class="f-right" title="Add Shelf" href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/shelf_add.php?room_id=<?php echo $room->id; ?>" rel="modal:open"><i class="fa fa-plus"></i></a>
             <div class="clearfix"></div>
@@ -61,14 +97,29 @@
             <?php
                 if($shelves){
                     foreach($shelves as $s){
+                        $shelf_style='';
+                        if($s->shelf_data){
+                            $shelf_data=json_decode($s->shelf_data);
+                            if($shelf_data->bg_image!==''){
+                                $shelf_style.='background-image:url('.get_site_url().'/wp-content/plugins/lbryworm/images/shelf_textures/'.$shelf_data->bg_image.'.jpg);background-position:center center;background-repeat:repeat;';
+                            }else{
+                                $shelf_style.='background-image:url('.get_site_url().'/wp-content/plugins/lbryworm/images/shelf_textures/wood-texture-1.jpg);background-position:center center;background-repeat:repeat;';
+                            }
+                        }else{
+                            $shelf_style.='background-image:url('.get_site_url().'/wp-content/plugins/lbryworm/images/shelf_textures/wood-texture-1.jpg);background-position:center center;background-repeat:repeat;';
+                        }
                         ?>
-                        <div class="shelf" id="shelf_<?php echo $s->id; ?>">
-                            <a href="?shelf=<?php echo $s->id; ?>">
-                                <?php echo $s->shelf_name; ?>
+                        <div class="library_item" id="shelf_<?php echo $s->id; ?>" style="<?php echo $shelf_style; ?>">
+                            <a class="library_item_title" href="?shelf=<?php echo $s->id; ?>">
+                                <?php echo stripslashes($s->shelf_name); ?>
                             </a>
                             
-                            <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/shelf_remove.php?id=<?php echo $s->id; ?>" rel="modal:open"><i class="fa fa-trash"></i></a>
+                            <div class="library_controls f-right">
+                                <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/shelf_remove.php?id=<?php echo $s->id; ?>" rel="modal:open"><i class="fa fa-trash"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
+                                                
                         <?php
                     }
                 }
@@ -82,11 +133,47 @@
         $room=$LBRYworm->rooms->get_room($shelf->room_id);
         $books=$LBRYworm->books->get_books($shelf->id);
         
+        
+        $room_style='';
+        if($room->room_data){
+            $room_data=json_decode($room->room_data);
+            if($room_data->bg_image!==''){
+                $room_style.='background-image:url('.get_site_url().'/wp-content/plugins/lbryworm/images/room_wallpapers/'.$room_data->bg_image.'.jpg);background-position:center center;';
+                if(stripos($room_data->bg_image,'-tile')>0){
+                    $room_style.='background-repeat:repeat;';
+                }else{
+                    $room_style.='background-repeat:no-repeat;background-size:cover;';
+                }
+            }
+        }
+        
+        $shelf_style='';
+        if($shelf->shelf_data){
+            $shelf_data=json_decode($shelf->shelf_data);
+            if($shelf_data->bg_image!==''){
+                $shelf_style.='background-image:url('.get_site_url().'/wp-content/plugins/lbryworm/images/shelf_textures/'.$shelf_data->bg_image.'.jpg)!important;';
+            }
+        }
+        
         ?>
+        <style>
+            <?php
+            if($room_style!==''){
+                ?>body{<?php echo $room_style; ?>}<?php
+            }
+            
+            if($shelf_style!==''){
+                ?>  .bookshelf_break,
+                    .bookshelf_break::before,
+                    .bookshelf_break::after{<?php echo $shelf_style; ?>}<?php
+            }
+            
+            ?>
+        </style>
         
         <div class="breadcrumbs">
             <div class="f-left">
-                <a href="<?php echo site_url(); ?>"><i class="fa fa-home"></i></a> &raquo; <a href="<?php echo site_url(); ?>/library/">Rooms</a> &raquo; <a href="<?php echo site_url(); ?>/library/?room=<?php echo $room->id; ?>"><?php echo $room->room_name; ?></a> &raquo; <?php echo $shelf->shelf_name; ?>
+                <a href="<?php echo site_url(); ?>"><i class="fa fa-home"></i></a> &raquo; <a href="<?php echo site_url(); ?>/library/">Rooms</a> &raquo; <a href="<?php echo site_url(); ?>/library/?room=<?php echo $room->id; ?>"><?php echo stripslashes($room->room_name); ?></a> &raquo; <?php echo stripslashes($shelf->shelf_name); ?>
             </div>
             <div class="clearfix"></div>
         </div>

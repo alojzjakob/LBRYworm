@@ -14,6 +14,10 @@ function lbryGetCookie(cname) {
   return "";
 }
 
+String.prototype.stripSlashes = function(){
+    return this.replace(/\\(.)/mg, "$1");
+}
+
 jQuery.noConflict();
 jQuery( document ).ready(function( $ ) {
   // Code that uses jQuery's $ can follow here.
@@ -347,11 +351,26 @@ function add_room_handler(){
                     data: form_data,
                     success: function(response){
                       if(!response.error){
-                        $("#rooms").append(`<div class="room" id="room_${response.data.id}" style="display:none;">
-                                              <a href="?room=${response.data.id}">
-                                                ${response.data.room_name} 
+                        
+                        var room_style='';
+                        var bg_image=$('#bg_image').val();
+                        if(bg_image!==''){
+                            room_style+='background-image:url('+lbryworm_site_url+'/wp-content/plugins/lbryworm/images/room_wallpapers/'+bg_image+'.jpg);background-position:center center;';
+                            if(bg_image.indexOf('-tile')>0){
+                                room_style+='background-repeat:repeat;';
+                            }else{
+                                room_style+='background-repeat:no-repeat;background-size:cover;';
+                            }
+                        }
+                        
+                        $("#rooms").append(`<div class="library_item" id="room_${response.data.id}" style="display:none;${room_style}">
+                                              <a class="library_item_title" href="?room=${response.data.id}">
+                                                ${response.data.room_name.stripSlashes()} 
                                               </a>
-                                              <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/room_remove.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                              <div class="library_controls f-right">
+                                                <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/room_remove.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                              </div>
+                                              <div class="clearfix"></div>
                                             </div>`);
                         $("#room_"+response.data.id).fadeIn();
                         $.modal.close();
@@ -398,11 +417,25 @@ function add_shelf_handler(){
                     data: form_data,
                     success: function(response){
                       if(!response.error){
-                        $("#shelves").append(`<div class="shelf" id="shelf_${response.data.id}" style="display:none;">
-                                              <a href="?shelf=${response.data.id}">
-                                                ${response.data.shelf_name} 
+                        
+                        var shelf_style='';
+                        var bg_image=$('#bg_image').val();
+                        //console.log(bg_image);
+                        if(bg_image!==''){
+                            shelf_style+='background-image:url('+lbryworm_site_url+'/wp-content/plugins/lbryworm/images/shelf_textures/'+bg_image+'.jpg);background-position:center center;background-repeat:repeat;';
+                        }else{
+                            shelf_style+='background-image:url('+lbryworm_site_url+'/wp-content/plugins/lbryworm/images/shelf_textures/wood-texture-1.jpg);background-position:center center;background-repeat:repeat;';
+                        }
+                        //console.log(shelf_style);
+                        
+                        $("#shelves").append(`<div class="library_item" id="shelf_${response.data.id}" style="display:none;${shelf_style}">
+                                              <a class="library_item_title" href="?shelf=${response.data.id}">
+                                                ${response.data.shelf_name.stripSlashes()} 
                                               </a>
-                                              <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/shelf_remove.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                              <div class="library_controls f-right">
+                                                <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/shelf_remove.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                              </div>
+                                              <div class="clearfix"></div>
                                             </div>`);
                         $("#shelf_"+response.data.id).fadeIn();
                         $.modal.close();
