@@ -1,16 +1,16 @@
 # LBRYworm
 Wordpress plugin to build a book (or whatever) search front-end for LBRY blockchain!
 
-Find your books and create your own library with rooms and shelves!
+Users on your website can then search for books and create their own library with rooms and shelves!
 
 ![](https://github.com/alojzjakob/LBRYworm/blob/main/lbryworm/css/lbryworm-logo.png)
 
 ## Available shortcodes
-**[lbryworm-search]** - displays search and search results
+**[lbryworm-search]** - displays search and search results, use it on homepage or a dedicated search page, it is up to you
 
-**[lbryworm-library]** - library management for logged in user
+**[lbryworm-library]** - library management for logged in user, use it on a page with www.yourwebsite.com/library URL
 
-**[lbryworm-profile-widget]** - widget that utilizes "clean login" plugin to show user account related icons
+**[lbryworm-profile-widget]** - widget that utilizes "clean login" plugin to show user account related icons, use it in header or sidebar or anywhere else, it is up to you
 
 ## Recommended additional plugins:
 https://wordpress.org/plugins/clean-login/
