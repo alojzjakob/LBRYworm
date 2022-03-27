@@ -99,7 +99,9 @@
         <style>
             <?php
             if($room_style!==''){
-                ?>body{<?php echo $room_style; ?>}<?php
+                ?>
+                body{<?php echo $room_style; ?>}
+                <?php
             }
             ?>
         </style>
