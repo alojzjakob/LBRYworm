@@ -48,16 +48,19 @@
                             <a class="library_item_title" href="?room=<?php echo $r->id; ?>">
                                 <?php echo stripslashes($r->room_name); ?>
                             </a>
-                            <div class="library_details f-left">
-                                <span>
-                                    <i class="fa fa-bars"></i><?php echo $shelves_count; ?>
-                                </span>
-                                <span>
-                                    <i class="fa fa-book"></i><?php echo $books_count; ?>
-                                </span>
-                            </div>
-                            <div class="library_controls f-right">
-                                <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/room_remove.php?id=<?php echo $r->id; ?>" rel="modal:open"><i class="fa fa-trash"></i></a>
+                            <div class="library_item_bottom">
+                                <div class="library_details f-left">
+                                    <span>
+                                        <i class="fa fa-bars"></i><?php echo $shelves_count; ?>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-book"></i><?php echo $books_count; ?>
+                                    </span>
+                                </div>
+                                <div class="library_controls f-right">
+                                    <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/room_remove.php?id=<?php echo $r->id; ?>" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -138,14 +141,17 @@
                                 <?php echo stripslashes($s->shelf_name); ?>
                             </a>
                             
-                            <div class="library_details f-left">
-                                <span>
-                                    <i class="fa fa-book"></i><?php echo $books_count; ?>
-                                </span>
-                            </div>
-                            
-                            <div class="library_controls f-right">
-                                <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/shelf_remove.php?id=<?php echo $s->id; ?>" rel="modal:open"><i class="fa fa-trash"></i></a>
+                            <div class="library_item_bottom">
+                                <div class="library_details f-left">
+                                    <span>
+                                        <i class="fa fa-book"></i><?php echo $books_count; ?>
+                                    </span>
+                                </div>
+                                
+                                <div class="library_controls f-right">
+                                    <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/shelf_remove.php?id=<?php echo $s->id; ?>" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
                             <div class="clearfix"></div>
                         </div>

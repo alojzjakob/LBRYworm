@@ -367,8 +367,11 @@ function add_room_handler(){
                                               <a class="library_item_title" href="?room=${response.data.id}">
                                                 ${response.data.room_name.stripSlashes()} 
                                               </a>
-                                              <div class="library_controls f-right">
-                                                <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/room_remove.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                              <div class="library_item_bottom">
+                                                <div class="library_controls f-right">
+                                                  <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/room_remove.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                                <div class="clearfix"></div>
                                               </div>
                                               <div class="clearfix"></div>
                                             </div>`);
@@ -433,8 +436,11 @@ function add_shelf_handler(){
                                               <a class="library_item_title" href="?shelf=${response.data.id}">
                                                 ${response.data.shelf_name.stripSlashes()} 
                                               </a>
-                                              <div class="library_controls f-right">
-                                                <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/shelf_remove.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                              <div class="library_item_bottom">
+                                                <div class="library_controls f-right">
+                                                  <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/shelf_remove.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                                <div class="clearfix"></div>
                                               </div>
                                               <div class="clearfix"></div>
                                             </div>`);
