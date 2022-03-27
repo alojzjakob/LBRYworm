@@ -373,6 +373,7 @@ function add_room_handler(){
                                               <div class="clearfix"></div>
                                             </div>`);
                         $("#room_"+response.data.id).fadeIn();
+                        $(".no_library_items_wrapper").hide();
                         $.modal.close();
                       }else{
                         $("#error_message").html(response.error_message).fadeIn();
@@ -438,6 +439,7 @@ function add_shelf_handler(){
                                               <div class="clearfix"></div>
                                             </div>`);
                         $("#shelf_"+response.data.id).fadeIn();
+                        $(".no_library_items_wrapper").hide();
                         $.modal.close();
                       }else{
                         $("#error_message").html(response.error_message).fadeIn();
@@ -482,8 +484,18 @@ function add_book_handler(){
                     data: form_data,
                     success: function(response){
                       if(!response.error){
-                        alert('Book added to the shelf!');
-                        $.modal.close();
+                        //alert('Book added to the shelf!');
+                        var success_msg=` <div class="modal">
+                                            <h4>Book added to shelf</h4>
+                                            <p>
+                                              <a href="${lbryworm_site_url}/library/?shelf=${response.data.shelf_id}">go to the shelf</a>
+                                            </p>
+                                            <p>
+                                              <a href="#close" class="f-right" rel="modal:close">OK</a>
+                                            </p>
+                                          </div>`;
+                        $(success_msg).appendTo('body').modal();
+                        //$.modal.close();
                       }else{
                         //$("#error_message").html(response.error_message).fadeIn();
                       }

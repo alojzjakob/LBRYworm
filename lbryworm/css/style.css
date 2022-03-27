@@ -265,11 +265,11 @@ body.dark .lbry-light-dark{
 }
 
 .homepage_hero h2, .login_gate h2{
-    text-shadow:0 0 20px #fff, 0 0 5px #fff;
+    text-shadow:0 0 20px #fff, 0 0 5px #fff, 0 0 10px #fff;
 }
 
 body.dark .homepage_hero h2, body.dark .login_gate h2{
-    text-shadow:0 0 20px #000, 0 0 5px #000;
+    text-shadow:0 0 20px #000, 0 0 5px #000, 0 0 10px #000;
 }
 
 
@@ -481,6 +481,45 @@ body.dark div.breadcrumbs,body.dark div.breadcrumbs a{
     box-shadow: 0 0 20px 0px rgba(255,255,255,1);
 }
 
+.no_library_items_wrapper,
+.no_library_items_wrapper:hover{
+    text-align:center;
+    background-color: rgba(255,255,255,0.7);
+    box-shadow: 0 0 20px 0px rgba(255,255,255,0.5);
+}
+
+
+
+
+.no_library_items_wrapper h4{
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.no_library_items_wrapper a{
+    padding:20px;
+    display:inline-block;
+    border-radius:10px;
+    margin-bottom:20px;
+    background-color:rgba(255,255,255,0.8);
+    border:1px solid #888;
+    text-decoration:none;
+}
+
+.no_library_items_wrapper a:hover{
+    background-color:rgba(255,255,255,1);
+}
+
+body.dark .no_library_items_wrapper a{
+    color:#ccc;
+    background-color:rgba(0,0,0,0.8);
+    border:1px solid #555;
+}
+body.dark .no_library_items_wrapper a:hover{
+    color:#fff;
+    background-color:rgba(0,0,0,1);
+}
+
 body.dark .library_item{
     background-color: rgba(0,0,0,0.2);
     box-shadow: 0 0 20px 0px rgb(0,0,0,0.4);
@@ -489,6 +528,12 @@ body.dark .library_item{
 
 body.dark .library_item:hover{
     box-shadow: 0 0 20px 0px rgb(0,0,0,1);
+}
+
+body.dark .no_library_items_wrapper,
+body.dark .no_library_items_wrapper:hover{
+    background-color: rgba(0,0,0,0.7);
+    box-shadow: 0 0 20px 0px rgb(0,0,0,0.4);
 }
 
 .library_item_title{

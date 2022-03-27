@@ -16,10 +16,10 @@
             <div class="clearfix"></div>
         </div>
     
-        a future place for <b>your own library</b> filled with your own <b>rooms</b> filled with <b>bookshelves</b> filled with <b>books</b> (ones you added from the search)!<br/><br/>
+        <!--a future place for <b>your own library</b> filled with your own <b>rooms</b> filled with <b>bookshelves</b> filled with <b>books</b> (ones you added from the search)!<br/><br/>
         This page is under development...<br/><br/>
         You can stay here and watch it come into shape, or just leave this page and use it later when this notice disappears.
-        <br/><br/>
+        <br/><br/>-->
         
         
         <div id="rooms">
@@ -63,6 +63,13 @@
                         </div>
                         <?php
                     }
+                }else{
+                    ?>
+                    <div class="library_item no_library_items_wrapper">
+                        <h4>No rooms...</h4>
+                        <a class="library_big_link" title="Add Room" href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/room_add.php" rel="modal:open">Click here to create a room</a>
+                    </div>
+                    <?php
                 }
             ?>
         </div>
@@ -143,6 +150,13 @@
                                                 
                         <?php
                     }
+                }else{
+                    ?>
+                    <div class="library_item no_library_items_wrapper">
+                        <h4>No shelves in this room...</h4>
+                        <a class="library_big_link" title="Add Shelf" href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/shelf_add.php?room_id=<?php echo $room->id; ?>" rel="modal:open">Click here to create a shelf</a>
+                    </div>
+                    <?php
                 }
             ?>
         </div>
