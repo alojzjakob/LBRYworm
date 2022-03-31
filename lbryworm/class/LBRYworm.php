@@ -18,7 +18,7 @@ class LBRYworm extends AJsToolBox{
     
     public function __construct(){
     
-        $this->jscss_ver='0.1.05';
+        $this->jscss_ver='0.1.11';
 
         $this->ChainQuery = new ChainQuery($this);
         
