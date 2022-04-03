@@ -415,9 +415,18 @@ function edit_room_handler(){
                             }
                         }
                         
+                        var shared_icon='';
+                        
+                        if(response.data.shared==1){
+                          shared_icon=`<div class="f-right">
+                                            <i class="fa fa-globe"></i>
+                                        </div>`;
+                        }
+                        
                         var new_html=`<div class="library_item" id="room_${response.data.id}" style="display:none;${room_style}">
                                               <a class="library_item_title" href="?room=${response.data.id}">
                                                 ${response.data.room_name.stripSlashes()} 
+                                                ${shared_icon}
                                               </a>
                                               <div class="library_item_bottom">
                                                 <div class="library_controls f-right">
@@ -539,9 +548,18 @@ function edit_shelf_handler(){
                         }
                         //console.log(shelf_style);
                         
+                        var shared_icon='';
+                        
+                        if(response.data.shared==1){
+                          shared_icon=`<div class="f-right">
+                                            <i class="fa fa-globe"></i>
+                                        </div>`;
+                        }
+                        
                         var new_html=`<div class="library_item" id="shelf_${response.data.id}" style="display:none;${shelf_style}">
                                               <a class="library_item_title" href="?shelf=${response.data.id}">
                                                 ${response.data.shelf_name.stripSlashes()} 
+                                                ${shared_icon}
                                               </a>
                                               <div class="library_item_bottom">
                                                 <div class="library_controls f-right">

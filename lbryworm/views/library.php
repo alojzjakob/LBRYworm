@@ -47,6 +47,15 @@
                         <div class="library_item" id="room_<?php echo $r->id; ?>" style="<?php echo $room_style; ?>">
                             <a class="library_item_title" href="?room=<?php echo $r->id; ?>">
                                 <?php echo stripslashes($r->room_name); ?>
+                                <?php
+                                if($r->shared){
+                                ?>
+                                <div class="f-right">
+                                    <i class="fa fa-globe"></i>
+                                </div>
+                                <?php
+                                }
+                                ?>
                             </a>
                             <div class="library_item_bottom">
                                 <div class="library_details f-left">
@@ -151,6 +160,15 @@
                         <div class="library_item" id="shelf_<?php echo $s->id; ?>" style="<?php echo $shelf_style; ?>">
                             <a class="library_item_title" href="?shelf=<?php echo $s->id; ?>">
                                 <?php echo stripslashes($s->shelf_name); ?>
+                                <?php
+                                if($s->shared){
+                                ?>
+                                <div class="f-right">
+                                    <i class="fa fa-globe"></i>
+                                </div>
+                                <?php
+                                }
+                                ?>
                             </a>
                             
                             <div class="library_item_bottom">
@@ -180,7 +198,13 @@
                     ?>
                     <div class="library_item no_library_items_wrapper">
                         <h4>No shelves in this room...</h4>
+                        <?php
+                        if($controls){
+                        ?>
                         <a class="library_big_link" title="Add Shelf" href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/shelf_add.php?room_id=<?php echo $room->id; ?>" rel="modal:open">Click here to create a shelf</a>
+                        <?php
+                        }
+                        ?>
                     </div>
                     <?php
                 }
