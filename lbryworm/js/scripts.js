@@ -370,6 +370,7 @@ function add_room_handler(){
                                               <div class="library_item_bottom">
                                                 <div class="library_controls f-right">
                                                   <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/room_remove.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                                  <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/room_edit.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-pencil"></i></a>
                                                 </div>
                                                 <div class="clearfix"></div>
                                               </div>
@@ -387,6 +388,63 @@ function add_room_handler(){
     });
   });
 }
+
+
+
+function edit_room_handler(){
+  jQuery( document ).ready(function( $ ) {
+    $("#edit_room_form").on('submit',function(e){
+      e.preventDefault();
+      var form_data=$("#edit_room_form").serialize();
+      var room_id=$("#edit_room_form").data('room_id');
+      $.ajax({
+                    type: "POST",
+                    url: lbryworm_ajax_url+'&method=edit_room',
+                    data: form_data,
+                    success: function(response){
+                      if(!response.error){
+                        
+                        var room_style='';
+                        var bg_image=$('#bg_image').val();
+                        if(bg_image!==''){
+                            room_style+='background-image:url('+lbryworm_site_url+'/wp-content/plugins/lbryworm/images/room_wallpapers/'+bg_image+'.jpg);background-position:center center;';
+                            if(bg_image.indexOf('-tile')>0){
+                                room_style+='background-repeat:repeat;';
+                            }else{
+                                room_style+='background-repeat:no-repeat;background-size:cover;';
+                            }
+                        }
+                        
+                        var new_html=`<div class="library_item" id="room_${response.data.id}" style="display:none;${room_style}">
+                                              <a class="library_item_title" href="?room=${response.data.id}">
+                                                ${response.data.room_name.stripSlashes()} 
+                                              </a>
+                                              <div class="library_item_bottom">
+                                                <div class="library_controls f-right">
+                                                  <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/room_remove.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                                  <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/room_edit.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-pencil"></i></a>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                              </div>
+                                              <div class="clearfix"></div>
+                                            </div>`;
+                        
+                        $("#room_"+room_id).fadeOut(200,function(){
+                          $("#room_"+room_id).replaceWith(new_html);
+                          $("#room_"+response.data.id).fadeIn();
+                        });
+                        
+                        $.modal.close();
+                      }else{
+                        $("#error_message").html(response.error_message).fadeIn();
+                      }
+                    },
+                  });
+      return false;
+    });
+  });
+}
+
 
 function remove_room_handler(){
   jQuery( document ).ready(function( $ ) {
@@ -439,12 +497,67 @@ function add_shelf_handler(){
                                               <div class="library_item_bottom">
                                                 <div class="library_controls f-right">
                                                   <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/shelf_remove.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                                  <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/shelf_edit.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-pencil"></i></a>
                                                 </div>
                                                 <div class="clearfix"></div>
                                               </div>
                                               <div class="clearfix"></div>
                                             </div>`);
                         $("#shelf_"+response.data.id).fadeIn();
+                        $(".no_library_items_wrapper").hide();
+                        $.modal.close();
+                      }else{
+                        $("#error_message").html(response.error_message).fadeIn();
+                      }
+                    },
+                  });
+      return false;
+    });
+  });
+}
+
+function edit_shelf_handler(){
+  jQuery( document ).ready(function( $ ) {
+    $("#edit_shelf_form").on('submit',function(e){
+      e.preventDefault();
+      var form_data=$("#edit_shelf_form").serialize();
+      var shelf_id=$("#edit_shelf_form").data('shelf_id');
+      $.ajax({
+                    type: "POST",
+                    url: lbryworm_ajax_url+'&method=edit_shelf',
+                    data: form_data,
+                    success: function(response){
+                      if(!response.error){
+                        
+                        var shelf_style='';
+                        var bg_image=$('#bg_image').val();
+                        //console.log(bg_image);
+                        if(bg_image!==''){
+                            shelf_style+='background-image:url('+lbryworm_site_url+'/wp-content/plugins/lbryworm/images/shelf_textures/'+bg_image+'.jpg);background-position:center center;background-repeat:repeat;';
+                        }else{
+                            shelf_style+='background-image:url('+lbryworm_site_url+'/wp-content/plugins/lbryworm/images/shelf_textures/wood-texture-1.jpg);background-position:center center;background-repeat:repeat;';
+                        }
+                        //console.log(shelf_style);
+                        
+                        var new_html=`<div class="library_item" id="shelf_${response.data.id}" style="display:none;${shelf_style}">
+                                              <a class="library_item_title" href="?shelf=${response.data.id}">
+                                                ${response.data.shelf_name.stripSlashes()} 
+                                              </a>
+                                              <div class="library_item_bottom">
+                                                <div class="library_controls f-right">
+                                                  <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/shelf_remove.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                                  <a href="${lbryworm_site_url}/wp-content/plugins/lbryworm/views/modal/shelf_edit.php?id=${response.data.id}" rel="modal:open"><i class="fa fa-pencil"></i></a>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                              </div>
+                                              <div class="clearfix"></div>
+                                            </div>`;
+                        
+                        $("#shelf_"+shelf_id).fadeOut(200,function(){
+                          $("#shelf_"+shelf_id).replaceWith(new_html);
+                          $("#shelf_"+response.data.id).fadeIn();
+                        });
+                        
                         $(".no_library_items_wrapper").hide();
                         $.modal.close();
                       }else{

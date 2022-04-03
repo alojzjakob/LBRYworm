@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 26, 2022 at 04:45 PM
+-- Generation Time: Apr 02, 2022 at 05:28 PM
 -- Server version: 5.6.51-cll-lve
 -- PHP Version: 7.3.32
 
@@ -34,7 +34,7 @@ CREATE TABLE `lw_books` (
   `room_id` bigint(20) NOT NULL,
   `shelf_id` bigint(20) NOT NULL,
   `claim_id` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `book_data` longtext
+  `book_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -47,7 +47,8 @@ CREATE TABLE `lw_rooms` (
   `id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   `room_name` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `room_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci
+  `room_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci,
+  `shared` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -60,8 +61,9 @@ CREATE TABLE `lw_shelves` (
   `id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   `room_id` bigint(20) NOT NULL,
-  `shelf_name` varchar(1024) DEFAULT NULL,
-  `shelf_data` longtext
+  `shelf_name` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `shelf_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci,
+  `shared` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

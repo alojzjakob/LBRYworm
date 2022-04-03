@@ -18,7 +18,7 @@ class LBRYworm extends AJsToolBox{
     
     public function __construct(){
     
-        $this->jscss_ver='0.1.11';
+        $this->jscss_ver='0.1.14';
 
         $this->ChainQuery = new ChainQuery($this);
         
@@ -100,6 +100,14 @@ class LBRYworm extends AJsToolBox{
             }
         }
         
+        if($method==='edit_room'){
+            if($_POST['room_name']!==''){
+                $response=array('error'=>false,'data'=>$this->rooms->update_room($_POST['id'],$_POST['room_name']));
+            }else{
+                $response=array('error'=>true,'error_message'=>'You did not enter the room name...');
+            }
+        }
+        
         if($method==='remove_room'){
             $response=array('error'=>false,'data'=>$this->rooms->remove_room($_POST['id']));
         }
@@ -107,6 +115,14 @@ class LBRYworm extends AJsToolBox{
         if($method==='add_shelf'){
             if($_POST['shelf_name']!==''){
                 $response=array('error'=>false,'data'=>$this->shelves->add_shelf($_POST['room_id'],$_POST['shelf_name']));
+            }else{
+                $response=array('error'=>true,'error_message'=>'You did not enter the shelf name...');
+            }
+        }
+        
+        if($method==='edit_shelf'){
+            if($_POST['shelf_name']!==''){
+                $response=array('error'=>false,'data'=>$this->shelves->update_shelf($_POST['id'],$_POST['shelf_name']));
             }else{
                 $response=array('error'=>true,'error_message'=>'You did not enter the shelf name...');
             }
@@ -171,8 +187,51 @@ class LBRYworm extends AJsToolBox{
         
         $data=array();
         
-        if(is_user_logged_in()){
+        $data['shared_room']=false;
+        $data['controls']=false;
+        
+        if(!isset($_GET['room']) and !isset($_GET['shelf'])){
             $data['rooms']=$this->rooms->get_rooms();
+        }
+        
+        if(isset($_GET['room'])){
+            $room=$this->rooms->get_room_anon($_GET['room']);
+            if((int)$room->shared and ((int)$room->user_id)!=$this->user->ID){
+                $data['room']=$room;
+                $data['shelves']=$this->shelves->get_shelves_anon($_GET['room'],$room->shared);
+                $data['shared_room']=true;
+            }else{
+                if(((int)$room->user_id)==$this->user->ID){
+                    $data['room']=$this->rooms->get_room($_GET['room']);
+                    $data['shelves']=$this->shelves->get_shelves($_GET['room']);
+                    $data['controls']=true;
+                }
+            }
+        }
+        
+        if(isset($_GET['shelf'])){
+            
+            $shelf=$this->shelves->get_shelf_anon($_GET['shelf']);
+            $room=$this->rooms->get_room_anon($shelf->room_id);
+            
+            if((int)$room->shared and $shelf->shared and ((int)$room->user_id)!=$this->user->ID){
+                $data['shelf']=$shelf;
+                $data['room']=$room;
+                $data['books']=$this->books->get_books_anon($data['shelf']->id);
+                $data['shared_room']=true;
+            }else{
+                if(((int)$room->user_id)==$this->user->ID){
+                    $data['shelf']=$this->shelves->get_shelf($_GET['shelf']);
+                    $data['room']=$this->rooms->get_room($data['shelf']->room_id);
+                    $data['books']=$this->books->get_books($data['shelf']->id);
+                    $data['controls']=true;
+                }
+            }
+            
+            
+        }
+        
+        if(is_user_logged_in() or $data['shared_room']){
             return $this->load_view('library',$data);
         }else{
             return $this->logged_in_gate();

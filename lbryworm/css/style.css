@@ -283,6 +283,13 @@ body.dark:after {
     text-shadow:0 0 20px #fff, 0 0 5px #fff, 0 0 10px #fff;
 }
 
+.homepage_hero img{
+    filter: drop-shadow(0 0 10px #fff);
+}
+body.dark .homepage_hero img{
+    filter: drop-shadow(0 0 10px #000);
+}
+
 body.dark .homepage_hero h2, body.dark .login_gate h2{
     text-shadow:0 0 20px #000, 0 0 5px #000, 0 0 10px #000;
 }
@@ -625,9 +632,23 @@ body.dark .library_item_title{
     margin-right:3px;
 }
 
-.library_details span{
+.library_details span, .library_controls a{
     margin-left:5px;
     margin-right:5px;
+}
+
+.library_controls a{
+    padding:5px;
+    border-radius:3px;
+}
+
+.library_controls a:hover{
+    background-color:#555;
+    color:#fff;
+}
+body.dark .library_controls a:hover{
+    background-color:#ccc;
+    color:#000;
 }
 
 body.dark .library_item_bottom{

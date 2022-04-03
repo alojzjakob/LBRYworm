@@ -22,12 +22,14 @@ class LBRYwormShelves{
                         'room_id'=>$room_id,
                         'shelf_name'=>$name,
                         'shelf_data'=>json_encode($_POST),
+                        'shared'=>isset($_POST['shared'])?1:0,
                     ),
                     array(
                         '%d',
                         '%d',
                         '%s',
                         '%s',
+                        '%d',
                     )
                 );
             return $this->get_shelf($wpdb->insert_id);
@@ -38,15 +40,43 @@ class LBRYwormShelves{
     }
     
     
+    public function update_shelf($id,$name){
+        global $wpdb;
+
+        $wpdb->update(
+                'lw_shelves',
+                array(
+                    'shelf_name'=>$name,
+                    'shelf_data'=>json_encode($_POST),
+                    'shared'=>isset($_POST['shared'])?1:0,
+                ),
+                array(
+                    'user_id'=>$this->LBRYworm->user->ID,
+                    'id'=>$id,
+                )
+            );
+        return $this->get_shelf($id);
+    }
+    
     
     public function get_shelves($room_id){
         global $wpdb;
         return $wpdb->get_results("SELECT * FROM lw_shelves WHERE room_id=$room_id AND user_id={$this->LBRYworm->user->ID} ORDER BY id ASC");
     }
     
+    public function get_shelves_anon($room_id,$shared=1){
+        global $wpdb;
+        return $wpdb->get_results("SELECT * FROM lw_shelves WHERE room_id=$room_id AND shared=$shared ORDER BY id ASC");
+    }
+    
     public function get_shelf($id){
         global $wpdb;
         return $wpdb->get_row("SELECT * FROM lw_shelves WHERE user_id={$this->LBRYworm->user->ID} AND id=$id");
+    }
+    
+    public function get_shelf_anon($id){
+        global $wpdb;
+        return $wpdb->get_row("SELECT * FROM lw_shelves WHERE id=$id");
     }
     
     public function get_shelves_count($room_id){

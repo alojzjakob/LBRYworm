@@ -49,6 +49,11 @@ class LBRYwormBooks{
         return $wpdb->get_results("SELECT * FROM lw_books WHERE shelf_id=$shelf_id AND user_id={$this->LBRYworm->user->ID} ORDER BY id ASC");
     }
     
+    public function get_books_anon($shelf_id){
+        global $wpdb;
+        return $wpdb->get_results("SELECT * FROM lw_books WHERE shelf_id=$shelf_id ORDER BY id ASC");
+    }
+    
     public function get_book($id){
         global $wpdb;
         return $wpdb->get_row("SELECT * FROM lw_books WHERE user_id={$this->LBRYworm->user->ID} AND id=$id");

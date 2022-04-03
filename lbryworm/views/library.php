@@ -59,6 +59,7 @@
                                 </div>
                                 <div class="library_controls f-right">
                                     <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/room_remove.php?id=<?php echo $r->id; ?>" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                    <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/room_edit.php?id=<?php echo $r->id; ?>" rel="modal:open"><i class="fa fa-pencil"></i></a>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -81,9 +82,6 @@
     
 
     if(isset($_GET['room'])){
-        
-        $shelves=$LBRYworm->shelves->get_shelves($_GET['room']);
-        $room=$LBRYworm->rooms->get_room($_GET['room']);
         
         $room_style='';
         if($room->room_data){
@@ -111,9 +109,23 @@
         
         <div class="breadcrumbs">
             <div class="f-left">
-                <a href="<?php echo site_url(); ?>"><i class="fa fa-home"></i></a> &raquo; <a href="<?php echo site_url(); ?>/library/">Rooms</a> &raquo; <?php echo stripslashes($room->room_name); ?>
+                <a href="<?php echo site_url(); ?>"><i class="fa fa-home"></i></a> &raquo; 
+                <?php
+                if($controls){
+                ?>
+                <a href="<?php echo site_url(); ?>/library/">Rooms</a> &raquo;
+                <?php
+                }
+                ?>
+                <?php echo stripslashes($room->room_name); ?>
             </div>
+            <?php
+            if($controls){
+            ?>
             <a class="f-right" title="Add Shelf" href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/shelf_add.php?room_id=<?php echo $room->id; ?>" rel="modal:open"><i class="fa fa-plus"></i></a>
+            <?php
+            }
+            ?>
             <div class="clearfix"></div>
         </div>
         
@@ -147,10 +159,16 @@
                                         <i class="fa fa-book"></i><?php echo $books_count; ?>
                                     </span>
                                 </div>
-                                
+                                <?php
+                                if($controls){
+                                ?>
                                 <div class="library_controls f-right">
                                     <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/shelf_remove.php?id=<?php echo $s->id; ?>" rel="modal:open"><i class="fa fa-trash"></i></a>
+                                    <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/shelf_edit.php?id=<?php echo $s->id; ?>" rel="modal:open"><i class="fa fa-pencil"></i></a>
                                 </div>
+                                <?php
+                                }
+                                ?>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="clearfix"></div>
@@ -171,11 +189,6 @@
         <?php
     }
     if(isset($_GET['shelf'])){
-
-        $shelf=$LBRYworm->shelves->get_shelf($_GET['shelf']);
-        $room=$LBRYworm->rooms->get_room($shelf->room_id);
-        $books=$LBRYworm->books->get_books($shelf->id);
-        
         
         $room_style='';
         if($room->room_data){
@@ -216,7 +229,22 @@
         
         <div class="breadcrumbs">
             <div class="f-left">
-                <a href="<?php echo site_url(); ?>"><i class="fa fa-home"></i></a> &raquo; <a href="<?php echo site_url(); ?>/library/">Rooms</a> &raquo; <a href="<?php echo site_url(); ?>/library/?room=<?php echo $room->id; ?>"><?php echo stripslashes($room->room_name); ?></a> &raquo; <?php echo stripslashes($shelf->shelf_name); ?>
+                <a href="<?php echo site_url(); ?>"><i class="fa fa-home"></i></a> &raquo; 
+                <?php
+                if($controls){
+                ?>
+                <a href="<?php echo site_url(); ?>/library/">Rooms</a> &raquo; 
+                <?php
+                }
+                ?>
+                <?php
+                if($controls or $shared_room){
+                ?>
+                <a href="<?php echo site_url(); ?>/library/?room=<?php echo $room->id; ?>"><?php echo stripslashes($room->room_name); ?></a> &raquo; 
+                <?php
+                }
+                ?>
+                <?php echo stripslashes($shelf->shelf_name); ?>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -255,9 +283,15 @@
                         <!--<?php echo $b->claim_id; ?>-->
                         
                         <div class="book_controls">
+                            <?php
+                            if($controls){
+                            ?>
                             <a href="<?php echo site_url(); ?>/wp-content/plugins/lbryworm/views/modal/book_remove.php?id=<?php echo $b->id; ?>" rel="modal:open">
                                 <i class="fa fa-trash"></i>
                             </a>
+                            <?php
+                            }
+                            ?>
                             <a href="lbry://<?php echo $book_data->name; ?>#<?php echo $book_data->claim_id; ?>" target="_blank" title="Open via LBRY app">
                                 <img class="external" src="/wp-content/plugins/lbryworm/css/open_on_lbrytv.png">
                             </a>

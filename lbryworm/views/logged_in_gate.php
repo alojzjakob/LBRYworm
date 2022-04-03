@@ -1,4 +1,4 @@
-<div class="lbryworm_content login_gate">
+<div class="lbryworm_content login_gate homepage_hero">
     <h2>Login needed</h2>
     <p>To use this feature, you need to login...</p>
     <p>

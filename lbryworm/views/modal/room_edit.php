@@ -4,13 +4,18 @@ include(dirname(__FILE__).'/../../../../../wp-blog-header.php');
 
 global $LBRYworm;
 
+$room=$LBRYworm->rooms->get_room($_GET['id']);
+
 ?>
 
-<form id="add_room_form">
+<form id="edit_room_form" data-room_id="<?php echo $_GET['id']; ?>">
     <div>
-        <h4>Add room</h4>
+        <h4>Editing room</h4>
+        <p><strong><?php echo stripslashes($room->room_name); ?></strong></p>
+        
         <p>
-            <input type="text" id="room_name" name="room_name" placeholder="Enter the room name">
+            <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
+            Room name: <input type="text" id="room_name" name="room_name" placeholder="Enter the room name" value="<?php echo stripslashes($room->room_name); ?>">
         <p>
         
         <p>
@@ -22,10 +27,16 @@ global $LBRYworm;
             <select name="bg_image" id="bg_image">
                 <option value=""> - none - </option>
                 <?php
+                $room_data=json_decode($room->room_data);
+                $cur_bg_image='';
+                if($room_data->bg_image!==''){
+                    $cur_bg_image=$room_data->bg_image;
+                }
+                
                 foreach($bg_images as $s){
                     $bg_image=basename($s,'.jpg');
                     ?>
-                        <option value="<?php echo $bg_image; ?>" data-img="<?php echo (get_site_url());?>/wp-content/plugins/lbryworm/images/room_wallpapers/<?php echo $bg_image; ?>.jpg">
+                        <option value="<?php echo $bg_image; ?>" data-img="<?php echo (get_site_url());?>/wp-content/plugins/lbryworm/images/room_wallpapers/<?php echo $bg_image; ?>.jpg" <?php if($cur_bg_image==$bg_image) echo ' selected'; ?>>
                             <?php echo str_replace(array('_','-'),' ',ucfirst($bg_image)); ?>
                         </option>
                     <?php
@@ -40,22 +51,23 @@ global $LBRYworm;
                 jQuery('#bg_image').on('change',function(){
                     jQuery('#bg_image_preview').css("background-image",'url("'+jQuery(this).find(':selected').data('img')+'")');
                 });
+                jQuery('#bg_image').trigger('change');
             </script>
         </p>
         
         <p>
-            <input type="checkbox" id="shared" name="shared" value="shared"> Public (shareable)
+            <input type="checkbox" id="shared" name="shared" value="shared" <?php if($room->shared){ echo ' checked';} ?>> Public (shareable)
         </p>
         
         <p class="error_message" id="error_message"></p>
         <p>
-            <button type="submit" id="add_room">Add</button> <a href="#close" class="f-right" rel="modal:close">cancel</a>
+            <button type="submit" id="edit_room">Save</button> <a href="#close" class="f-right" rel="modal:close">cancel</a>
         <p>
     </div>
 </form>
 
 <script type="text/javascript">
 
-add_room_handler();
+edit_room_handler();
 
 </script>
