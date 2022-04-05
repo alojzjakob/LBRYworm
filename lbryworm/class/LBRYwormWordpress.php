@@ -80,8 +80,11 @@ class LBRYwormWordpress{
     }
     
     public function enqueue_scripts(){
-        wp_register_style('lbryworm-css', ((get_site_url()) . '/wp-content/plugins/lbryworm/css/style.css'), array(), $this->LBRYworm->jscss_ver);
-        wp_enqueue_style('lbryworm-css');
+        
+        if(get_option('lw_2022_wp_theme_built_in_css')){
+            wp_register_style('lbryworm-css', ((get_site_url()) . '/wp-content/plugins/lbryworm/css/style.css'), array(), $this->LBRYworm->jscss_ver);
+            wp_enqueue_style('lbryworm-css');
+        }
         
         wp_register_style('animate-css', ((get_site_url()) . '/wp-content/plugins/lbryworm/css/animate.min.css'), array(), $this->LBRYworm->jscss_ver);
         wp_enqueue_style('animate-css');

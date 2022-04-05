@@ -102,20 +102,23 @@ class LBRYwormAdmin{
         <?php
         if(isset($_POST['lw_save_settings'])){
             //update_option('lw_setting_1',$_POST['lw_setting_1']);
-            update_option('lw_setting_1',isset($_POST['lw_setting_1']));
+            //update_option('lw_setting_1',isset($_POST['lw_setting_1']));
+            update_option('lw_2022_wp_theme_built_in_css',isset($_POST['lw_2022_wp_theme_built_in_css']));
             echo '<h2>settings saved!</h2><br/>';
         }
         
-        $lw_setting_1=get_option('lw_setting_1');
+        //$lw_setting_1=get_option('lw_setting_1');
+        $lw_2022_wp_theme_built_in_css=get_option('lw_2022_wp_theme_built_in_css');
         ?>
         
         <form method="post">
             <div style="padding:10px; border:1px solid #555; width:90%;">
                 <h2>General settings</h2>
                 <div style="margin-bottom:10px;">
-                    <input type="checkbox" name="lw_setting_1" value="lw_setting_1" <?php if($lw_setting_1){echo 'checked';} ?>>
-                    <label for="dm_per_page">
-                        Setting 1
+                    <!--<input type="checkbox" name="lw_setting_1" value="lw_setting_1" <?php if($lw_setting_1){echo 'checked';} ?>>-->
+                    <input type="checkbox" name="lw_2022_wp_theme_built_in_css" value="lw_2022_wp_theme_built_in_css" <?php if($lw_2022_wp_theme_built_in_css){echo 'checked';} ?>>
+                    <label for="lw_2022_wp_theme_built_in_css">
+                        Use included plugin CSS compatible with Twenty Twenty Two Wordpress theme
                     </label>
                 </div>
             </div>
@@ -158,7 +161,7 @@ class LBRYwormAdmin{
     public function dashboard_widget_links() {
         ?>
         <a href="/wp-admin/admin.php?page=lbryworm-settings">Settings</a><br/><br/>
-        <a href="/wp-admin/admin.php?page=lbryworm-api">Api</a><br/><br/>
+        <a href="/wp-admin/admin.php?page=lbryworm-shortcodes">Shortcodes</a><br/><br/>
         <?php
     }
     
