@@ -43,7 +43,8 @@ body.dark:after {
 }
 
 .lbryworm_content{
-    margin-top:62px;
+    /*margin-top:62px;*/
+    padding-top:62px;
     z-index:0;
     margin-bottom:100px;
 }
